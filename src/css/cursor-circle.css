@@ -1,0 +1,45 @@
+.circle {
+  z-index: 99;
+	position: absolute;
+    border: solid 2px #f4d5f699;
+	width: 2em; 
+	height: 2em; 
+    border-radius: 50%; 
+    pointer-events: none; 
+}
+
+.ripple {
+    z-index: 99;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: #a966ae4f;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple-animation 1s ease-out;
+}
+  
+@keyframes ripple-animation {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+}
+
+.circle.circle-shrink {
+    animation: circle-shrink 0.1s ease-in-out;
+}
+
+@keyframes circle-shrink {
+    0% {
+      transform: scale(1);
+      background-color: #f4d5f699
+    }
+    50% {
+      transform: scale(0.8);
+    }
+    100% {
+      transform: scale(1);
+      background-color: #f4d5f600;
+    }
+}

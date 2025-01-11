@@ -25,10 +25,13 @@
 			property="og:image"
 		/>
 
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/temp.css" />
-		<link rel="stylesheet" href="css/cursor.css" />
+		<!-- Webrings -->
+		<link
+			rel="stylesheet"
+			href="https://webring.nekoweb.org/onionring.css"
+		/>
 
+		<!-- 3rd party CDNs -->
 		<link
 			href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
 			rel="stylesheet"
@@ -41,47 +44,175 @@
 			crossorigin="anonymous"
 			referrerpolicy="no-referrer"
 		/>
+
+		<!-- 3rd party scripts -->
+		<script src="/src/js/jquery-3.7.1.min.js"></script>
+
+		<!-- personal css and heading scripts -->
+		<link rel="stylesheet" href="/src/css/style.css" />
+		<link rel="stylesheet" href="/src/css/cursor-circle.css" />
+		<link rel="stylesheet" href="/src/css/circle-bg.css" />
+
 	</head>
 
 	<body>
 		<main>
-			<div class="temp">
-				<img class="logo" src="images/luna-logo.png">
-				<h1 style="color:#fcd4e0"><i class="fa-solid fa-hammer"></i> under construction</h1>
-				<hr>
-				<p>uwa... i'm currently upgrading my website to a new layout. please come back at a later time!</p>
-				
-				<label for="inline-bar" style="color:#fcd4e0">Progress to v2</label>
+
+			<div id="logo">
+				<img
+					src="/res/images/luna-logo.png"
+					alt="Lunaui Logo"
+				/>
+			</div>
+
+			<nav id="top-nav">
+				<p id="catchphrase">
+					part time programmer, full time lunaui.
+				</p>
+				<p>
+					<a href="#">lorem</a>
+					<a href="#">ipsum</a>
+					<a href="#">dolor</a>
+					<a href="#">sit</a>
+					<a href="#">amet</a>
+				</p>
+			</nav>
+
+			<div id="ticker">
+				<label for="inline-bar" style="color:#fcd4e0">
+					Layout v2 Progress
+				</label>
 				<div id="inline-bar">
 					<div class="progress-border">
-						<div class="progress-bar" style="height:24px;width:20%">20%</div>
+						<div class="progress-bar" style="height:24px;width:55%">
+							55%
+						</div>
 					</div>
 				</div>
+				<span id="progress-placeholder-text">* This bar is temporary and <b>will</b> be replaced!</span>
+			</div>
 
-				<p id="layout-p"><a href="https://lunaui.cc" id="layout-v1">Layout v1 <i class="fa-solid fa-arrow-right"></i></a></p>
-				
+			<fieldset id="content" class="box-container">
+				<legend>meow</legend>
+				hi
+			</fieldset>
+
+			<fieldset id="about-me" class="box-container">
+				<legend>lunaui</legend>
+				hi
+			</fieldset>
+
+			<fieldset id="side-content" class="box-container">
+				<legend>webrings</legend>
+				<div id="smallvocaring">
+					<script src="https://webring.adilene.net/smallwidget.js"></script>
+				</div>
+				<div id="nekowebring">
+					<script
+						type="text/javascript"
+						src="https://webring.nekoweb.org/onionring-variables.js"
+					></script>
+					<script
+						type="text/javascript"
+						src="https://webring.nekoweb.org/onionring-widget.js"
+					></script>
+				</div>
+			</fieldset>
+
+			<fieldset id="side-nav" class="box-container">
+				<legend>current commit</legend>
+				<span id="commit"><i class="fa-brands fa-github commit-icon"></i></span>
 				<hr>
+				<small id="commit-date"></small>
+				<br>
+				<small id="git-diff"></small>
+				<p id="commit-message"></p>
+			</fieldset>
+
+			<fieldset id="button-container-box" class="box-container">
+				<legend>my button</legend>
+				<a href="https://neko.lunaui.cc">
+					<img
+						src="/res/images/button.gif"
+						height="31"
+						width="88"
+						style="image-rendering:pixelated;"
+					/>
+				</a>
+				<textarea id="button-field" readonly onclick="this.select()">
+					<a href="https://neko.lunaui.cc">
+						<img
+							src="/res/images/button.gif"
+							height="31"
+							width="88"
+							style="image-rendering:pixelated;"
+						/>
+					</a>
+					<!-- button by lunaui.cc -->
+				</textarea>
+			</fieldset>
+
+			<footer id="footer">
+				<a href="https://nekoweb.org/">
+					<img
+						src="https://nekoweb.org/assets/buttons/button11.gif"
+					/>
+				</a>
+				<!-- button by milkyway.moe -->
+
+				<a href="https://neko.lunaui.cc">
+					<img
+						src="/res/images/button.gif"
+						height="31"
+						width="88"
+						style="image-rendering:pixelated;"
+					/>
+				</a>
+				<!-- button by lunaui.cc -->
+
+				<br>
+				<span>&#169; 2023-2025 lunaui. All Rights Reserved.</span>
 				<br>
 
-				<a href="https://nekoweb.org/"><img src="https://nekoweb.org/assets/buttons/button11.gif"></a><!-- button by milkyway.moe -->
-				
-				<a href="https://neko.lunaui.cc"><img src="button.gif" height="31" width="88" style="image-rendering:pixelated;"></a>
-			
-				<div class="circles">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-				</div>
+				<span id="contact">
+					<a href="mailto:contact@lunaui.cc">contact@lunaui.cc</a>
+					 | 
+					<a href="/res/lunaui.gpg">pgp public key</a>
+				</span>
+			</footer>
+
+			<div class="circles">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
 			</div>
+
 		</main>
 
-		<script src="./oneko.js"></script>
+		<div id="mobile-modal-container">
+			<fieldset id="mobile-modal" class="box-container">
+				<legend>erm</legend>
+				<p><b>mobile layout detected.</b></p>
+				<p>my site's layout is <b>not</b> designed for mobile use or small screens and will absolutely explode. it's best to come back when you have
+					access to a computer or laptop.</p>
+				<p>if you're on a tablet, you can try rotating it to landscape mode.</p>
+				<br>
+				<p id="ignore-mobile-p"><a id="ignore-mobile">continue anyways</a></p>
+			</fieldset>
+		</div>
+
+		<span id="circle" class="circle"></span>
+
+		<script src="/src/js/oneko.js"></script>
+		<script src="/src/js/cursor.js"></script>
+		<script src="/src/js/commit.js"></script>
+		<script src="/src/js/mobile.js"></script>
 	</body>
 </html>
