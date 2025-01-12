@@ -26,13 +26,13 @@ main {
     display: grid;
     gap: 0.5em 0.5em;
     grid-template:
-        "logo logo top-nav top-nav"minmax(0, 1fr) 
-        "ticker ticker ticker ticker"minmax(0, 0.4fr) 
-        "about-me content content content"minmax(0, 1.0fr) 
-        "side-nav content content content"minmax(0, 1.0fr) 
-        "side-content content content content"minmax(0, 1.0fr) 
-        "button-container-box content content content"minmax(0, 0.7fr) 
-        "footer footer footer footer"auto / 1fr 1fr 1fr 1fr;
+        "logo logo top-nav top-nav top-nav"minmax(0, 1fr) 
+        "ticker ticker ticker ticker ticker"minmax(0, 0.4fr) 
+        "side-nav content content content content"minmax(0, 1.0fr) 
+        "side-content content content content content"minmax(0, 1.0fr) 
+        "ads content content content content"minmax(0, 1.55fr) 
+        "button-container-box content content content content"minmax(0, 0.85fr) 
+        "footer footer footer footer footer" auto / 1fr 0.25fr 0.75fr 1fr 1fr;
     max-height: 130vh;
 }
 
@@ -43,6 +43,7 @@ main {
     backdrop-filter: blur(5px);
     overflow: auto;
     padding: 0.5rem;
+    border-radius: 10px;
 
     /* firefox */
     @-moz-document url-prefix() {
@@ -91,8 +92,8 @@ main {
 }
 
 #logo img {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 125%;
+    max-height: 125%;
 }
 
 #top-nav {
@@ -134,8 +135,8 @@ main {
     grid-area: ticker;
 }
 
-#about-me {
-    grid-area: about-me;
+#ads {
+    grid-area: ads;
 }
 
 #side-content {
@@ -162,6 +163,11 @@ main {
 #footer {
     text-align: center;
     grid-area: footer;
+    z-index: 1;
+}
+
+#footer a {
+    text-decoration: none;
 }
 
 #inline-bar {
@@ -186,6 +192,11 @@ main {
 #progress-placeholder-text {
     font-size: 0.6rem;
     color: #fcd4e062;
+}
+
+.progress-below {
+    display: flex;
+    justify-content: space-between;
 }
 
 #contact {
@@ -291,4 +302,23 @@ textarea {
     #mobile-modal-container {
         display: block;
     }
+}
+
+#now-playing {
+    display: none;
+
+    color: #ffe6f7;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+}
+
+#now-playing-button {
+    display: none;
+    cursor: pointer;
+
+    background-color: #fcd4e022;
+    color: #ffe6f7;
+    border: #fcd4e0 1px solid;
+    border-radius: 1em;
+    padding: 0.5em;
+    text-decoration: none;
 }

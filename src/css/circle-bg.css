@@ -1,10 +1,10 @@
 .circles {
 	pointer-events: none;
     position: absolute;
-    top: 40vh;
+    top: 0vh;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 140%;
     overflow: hidden;
     z-index: 0;
 }
@@ -18,7 +18,7 @@
     100% {
         opacity: 0;
         border-radius: 50%;
-        transform: translateY(-800px) rotate(1440deg);
+        transform: translateY(-120vh) rotate(1440deg);
     }
 }
 
@@ -27,8 +27,8 @@
     position: absolute;
     display: block;
     width: 20px;
-    height: 20px;
-    background: #ffffff2e;
+    height: 25px;
+    background: #a3669d2e;
     bottom: -100px;
     animation: animate 20s linear infinite;
     z-index: 0;

@@ -66,15 +66,18 @@
 			</div>
 
 			<nav id="top-nav">
+				<span id="now-playing">&#9834;ユメガタリ ～ 雨の日トロイメライ ～</span>
+				<span id="now-playing-button"><i class='bx bx-volume-full'></i> play music?</span>
 				<p id="catchphrase">
 					part time programmer, full time lunaui.
 				</p>
 				<p>
-					<a href="#">lorem</a>
-					<a href="#">ipsum</a>
-					<a href="#">dolor</a>
-					<a href="#">sit</a>
-					<a href="#">amet</a>
+					<a href="#">me</a>
+					<a href="#">projects</a>
+					<a href="#">blog</a>
+					<a href="#">links</a>
+					<a href="https://lunaui.atabook.org/">guestbook</a>
+					<a href="https://nekoweb.org/follow/lunaui" style="border: none;">[+]</a>
 				</p>
 			</nav>
 
@@ -84,22 +87,24 @@
 				</label>
 				<div id="inline-bar">
 					<div class="progress-border">
-						<div class="progress-bar" style="height:24px;width:55%">
-							55%
+						<div class="progress-bar" style="height:24px;width:70%">
+							70%
 						</div>
 					</div>
 				</div>
 				<span id="progress-placeholder-text">* This bar is temporary and <b>will</b> be replaced!</span>
 			</div>
 
-			<fieldset id="content" class="box-container">
-				<legend>meow</legend>
-				hi
+			<fieldset id="nekolink" class="box-container">
+				<legend>nekolink</legend>
+				<iframe width="190" height="190" style="border:none" src="https://rice.nekoweb.org/nekolink.html"></iframe>
 			</fieldset>
 
-			<fieldset id="about-me" class="box-container">
-				<legend>lunaui</legend>
-				hi
+			<fieldset id="content" class="box-container">
+				<legend>meow</legend>
+				<p>
+					<img src="/res/images/image.png">
+				</p>
 			</fieldset>
 
 			<fieldset id="side-content" class="box-container">
@@ -139,6 +144,7 @@
 						style="image-rendering:pixelated;"
 					/>
 				</a>
+				<br><small>feel free to hotlink!</small>
 				<textarea id="button-field" readonly onclick="this.select()">
 					<a href="https://neko.lunaui.cc">
 						<img
@@ -170,6 +176,55 @@
 				</a>
 				<!-- button by lunaui.cc -->
 
+				<a href="https://undertale.com/">
+					<img
+						src="/res/images/btn/undertale.png"
+						alt="this webmaster loves undertale button"
+					/>
+				</a>
+
+				<a href="https://archlinux.org/">
+					<img
+						src="/res/images/btn/arch2.png"
+						alt="arch user button"
+					/>
+				</a>
+
+				<a href="https://osu.ppy.sh/users/14048928">
+					<img
+						src="/res/images/btn/osu.png"
+						alt="osu user button by ThinLiquid"
+					/>
+				</a>
+
+				<a href="https://joo.sh">
+					<img
+						src="/res/images/btn/plasma.png"
+						alt="joo.sh's plasma button"
+					/>
+				</a>
+
+				<a href="https://code.visualstudio.com/">
+					<img
+						src="/res/images/btn/vscode.png"
+						alt="vs code button"
+					/>
+				</a>
+
+				<a href="https://www.youtube.com/@Petscop/videos">
+					<img
+						src="/res/images/btn/petscop.png"
+						alt="petscop button"
+					/>
+				</a>
+
+				<a>
+					<img
+						src="/res/images/btn/computer.png"
+						alt="this website is best viewed on a computer"
+					/>
+				</a>
+
 				<br>
 				<span>&#169; 2023-2025 lunaui. All Rights Reserved.</span>
 				<br>
@@ -198,7 +253,7 @@
 
 		<div id="mobile-modal-container">
 			<fieldset id="mobile-modal" class="box-container">
-				<legend>erm</legend>
+				<legend>erm...</legend>
 				<p><b>mobile layout detected.</b></p>
 				<p>my site's layout is <b>not</b> designed for mobile use or small screens and will absolutely explode. it's best to come back when you have
 					access to a computer or laptop.</p>
@@ -210,6 +265,7 @@
 
 		<span id="circle" class="circle"></span>
 
+		<script defer src="/src/js/music.js"></script>
 		<script src="/src/js/oneko.js"></script>
 		<script src="/src/js/cursor.js"></script>
 		<script src="/src/js/commit.js"></script>
