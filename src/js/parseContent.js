@@ -3,33 +3,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const content = ["me", "projects", "blog", "links"];
     let currentContentIndex = content.indexOf("me");
     let currentContentDisplayed = content[currentContentIndex];
+    const contentCache = {};
 
-    function loadContent(content) {
-        const xhr = new XMLHttpRequest();
-    
-        xhr.open("GET", `/src/html/${content}.html`);
-    
-        xhr.onload = () => {
-            if (xhr.status === 200) {
-                contentContainer.removeChild(contentContainer.lastElementChild);
+    async function loadContent(content) {
+        if (contentCache[content]) {
+            displayContent(contentCache[content]);
+            return;
+        }
 
-                const newContent = document.createElement("div");
-                newContent.style = "height: 100%; width: 100%;";
-                newContent.innerHTML = xhr.responseText;
-
-                contentContainer.appendChild(newContent);
-            } else {
-                console.error("Failed to load HTML:", xhr.status);
-                contentContainer.innerHTML = "<p>the content couldn't be loaded... maybe the script is borken! if you see this, please contact me!!</p>";
+        try {
+            const response = await fetch(`/src/html/${content}.html`);
+            if (!response.ok) {
+                throw new Error(`Failed to load HTML: ${response.status}`);
             }
-        };
-        xhr.onerror = () => {
-            console.error("Network error");
-            contentContainer.innerHTML =
-                "<p>oops... couldn't connect to server! check ur internet connection!</p>";
-        };
-    
-        xhr.send();
+            const html = await response.text();
+            contentCache[content] = html;
+            displayContent(html);
+        } catch (error) {
+            console.error(error);
+            contentContainer.innerHTML = "<p>the content couldn't be loaded... maybe the script is borken! if you see this, please contact me!!</p>";
+        }
+    }
+
+    function displayContent(html) {
+        contentContainer.innerHTML = ''; // Clear existing content
+        const newContent = document.createElement("div");
+        newContent.style = "height: 100%; width: 100%;";
+        newContent.innerHTML = html;
+        contentContainer.appendChild(newContent);
+        window.parsingDone = true;
     }
 
     function updateContentDisplay() {
