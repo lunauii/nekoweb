@@ -9,7 +9,7 @@ body, html {
     background-color: #211a22;
     background-image: linear-gradient(-225deg, #35243a, #1b171b);
     color: #ffffff;
-    min-height: 130vh;
+    min-height: 100vh;
     font-family: 'MS PGothic', 'Roboto', sans-serif;
     padding: 0;
     margin: 0;
@@ -23,7 +23,7 @@ body::-webkit-scrollbar {
 
 main {
     padding: 5vh 20vw;
-    display: grid;
+    display: none;
     gap: 0.5em 0.5em;
     grid-template:
         "logo logo top-nav top-nav top-nav"minmax(0, 1fr) 
@@ -109,7 +109,7 @@ main {
 }
 
 #top-nav a {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     padding: 0.2rem 0.4rem;
     border: #f0caf3 1px dashed;
     text-decoration: none;
@@ -321,4 +321,24 @@ textarea {
     border-radius: 1em;
     padding: 0.5em;
     text-decoration: none;
+}
+
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+}
+
+.placeholder img {
+    max-width: 50%;
+    height: auto;
+}
+
+.placeholder p {
+    color: #bea2c1bb;
+    text-align: center;
 }

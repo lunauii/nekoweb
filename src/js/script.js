@@ -1,6 +1,7 @@
-function selectText() {
-  const text = document.getElementById('button-field');
+console.log(`
+        へ  ♡ ╱|、
+     ૮ - ՛)   (\` - 7
+     / ⁻ ៸|    |、⁻〵
+ 乀 (ˍ,ل ل    じしˍ,)ノ
 
-  userid.addEventListener(`focus`, () => userid.select());
-
-}
+theres nothing to see here :3`);

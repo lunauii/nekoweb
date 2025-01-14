@@ -94,7 +94,7 @@
     nekoEl.style.imageRendering = "pixelated";
     nekoEl.style.left = `${nekoPosX - 16}px`;
     nekoEl.style.top = `${nekoPosY - 16}px`;
-    nekoEl.style.zIndex = 2147483647;
+    nekoEl.style.zIndex = 5000;
 
     let nekoFile = "/res/images/oneko.gif"
     const curScript = document.currentScript

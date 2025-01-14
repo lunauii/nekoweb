@@ -5,6 +5,7 @@ var nowPlayingText = document.getElementById('now-playing');
 var currentlyPlaying = false;
 
 music.volume = 0.1;
+music.loop = true;
 
 music.play();
 
