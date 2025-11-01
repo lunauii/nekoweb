@@ -1,0 +1,25 @@
+---
+interface Props {
+    url?: string | URL;
+    img: string;
+}
+
+const {url, img} = Astro.props as Props;
+---
+{url ? (
+    <a href={url}>
+        <img
+            src={img}
+            height="31"
+            width="88"
+            style="image-rendering:pixelated;"
+        />
+    </a>
+) : (
+    <img
+        src={img}
+        height="31"
+        width="88"
+        style="image-rendering:pixelated;"
+    />
+)}

@@ -1,11 +1,275 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import SourceNotice from "../components/SourceNotice.astro"
+import Partial from "../components/Partial.astro"
+import CommitInfo from "../components/CommitInfo.astro"
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<title>silent night</title>
+
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<meta
+			name="description"
+			content="part time programmer, full time lunaui."
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<meta content="#FCD4E0" data-react-helmet="true" name="theme-color" />
+		<meta content="Lunaui" property="og:title" />
+		<meta
+			content="part time programmer, full time lunaui."
+			property="og:description"
+		/>
+		<meta content="https://neko.lunaui.cc/" property="og:url" />
+		<meta
+			content="../assets/images/luna-logo.png"
+			property="og:image"
+		/>
+
+		
+
+		<!-- Webrings -->
+		<link
+			rel="stylesheet"
+			href="https://webring.nekoweb.org/onionring.css"
+		/>
+
+		<!-- 3rd party CDNs -->
+		<link
+			href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+			rel="stylesheet"
+		/>
+
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+			integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+
+		<!-- 3rd party scripts -->
+		<script is:inline src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+		<!-- personal css and heading scripts -->
+		<link rel="stylesheet" href="../src/styles/style.css" />
+		<link rel="stylesheet" href="../src/styles/cursor-circle.css" />
+		<link rel="stylesheet" href="../src/styles/circle-bg.css" />
+	</head>
+
+	<body>
+    <SourceNotice/>
+		<main>
+			<div id="logo">
+				<img
+					src="../src/assets/images/luna-logo.png"
+					alt="Lunaui Logo"
+				/>
+			</div>
+
+			<nav id="top-nav">
+				<span id="now-playing">&#9834;ユメガタリ ～ 雨の日トロイメライ ～</span>
+				<span id="now-playing-button"><i class='bx bx-volume-full'></i> play music?</span>
+				<p id="catchphrase">
+					part time programmer, full time lunaui.
+				</p>
+				<p>
+					<a id="me" class="top-nav-btn" href="#">me</a>
+					<a id="projects" class="top-nav-btn" href="#">projects</a>
+					<a id="blog" class="top-nav-btn" href="/blog/">blog</a>
+					<a id="links" class="top-nav-btn" href="#">links</a>
+					<a href="https://lunaui.atabook.org/">guestbook</a>
+					<a href="https://nekoweb.org/follow/lunaui" style="border: none;">[+]</a>
+				</p>
+			</nav>
+
+			<div id="ticker">
+				<label for="inline-bar" style="color:#fcd4e0">
+					Layout v2 Progress
+				</label>
+				<div id="inline-bar">
+					<div class="progress-border">
+						<div class="progress-bar" style="height:24px;width:80%">
+							80%
+						</div>
+					</div>
+				</div>
+				<span id="progress-placeholder-text">* This bar is temporary and <b>will</b> be replaced!</span>
+			</div>
+
+			<fieldset id="nekolink" class="box-container">
+				<legend>nekolink</legend>
+				<iframe width="190" height="190" style="border:none" title="nekolink" src="https://rice.nekoweb.org/nekolink.html"></iframe>
+			</fieldset>
+
+			<fieldset id="content" class="box-container">
+				<legend>meow</legend>
+				<Partial/>
+			</fieldset>
+
+			<fieldset id="side-content" class="box-container">
+				<legend>webrings</legend>
+				<div id="smallvocaring">
+					<script src="https://webring.adilene.net/smallwidget.js"></script>
+				</div>
+				<div id="nekowebring">
+					<script
+						type="text/javascript"
+						src="https://webring.nekoweb.org/onionring-variables.js"
+					></script>
+					<script
+						type="text/javascript"
+						src="https://webring.nekoweb.org/onionring-widget.js"
+					></script>
+				</div>
+			</fieldset>
+
+			<CommitInfo/>
+
+            <fieldset id="button-container-box" class="box-container">
+                <legend>my button</legend>
+                <a href="https://neko.lunaui.cc">
+                    <img
+                    src="../src/assets/images/button.gif"
+                    height="31"
+                    width="88"
+                    style="image-rendering:pixelated;"
+                    />
+                </a>
+                <br />
+                <small>feel free to hotlink!</small>
+                <textarea id="button-field" readonly onclick="this.select()">
+                    &lt;a href="https://neko.lunaui.cc"&gt;
+                    &lt;img
+                        src="../src/assets/images/hotlink-ok/button.gif"
+                        height="31"
+                        width="88"
+                        style="image-rendering:pixelated;"
+                    /&gt;
+                    &lt;/a&gt;
+                    &lt;!-- button by lunaui.cc --&gt;
+                </textarea>
+            </fieldset>
+
+			<footer id="footer">
+				<a href="https://nekoweb.org/">
+					<img
+						src="https://nekoweb.org/assets/buttons/button11.gif"
+					/>
+				</a>
+				<!-- button by milkyway.moe -->
+
+				<a href="https://neko.lunaui.cc">
+					<img
+						src="../src/assets/images/button.gif"
+						height="31"
+						width="88"
+						style="image-rendering:pixelated;"
+					/>
+				</a>
+				<!-- button by lunaui.cc -->
+
+				<a href="https://undertale.com/">
+					<img
+						src="../src/assets/images/btn/undertale.png"
+						alt="this webmaster loves undertale button"
+					/>
+				</a>
+
+				<a href="https://archlinux.org/">
+					<img
+						src="../src/assets/images/btn/arch2.png"
+						alt="arch user button"
+					/>
+				</a>
+
+				<a href="https://osu.ppy.sh/users/14048928">
+					<img
+						src="../src/assets/images/btn/osu.png"
+						alt="osu user button by ThinLiquid"
+					/>
+				</a>
+
+				<a href="https://joo.sh">
+					<img
+						src="../src/assets/images/btn/plasma.png"
+						alt="joo.sh's plasma button"
+					/>
+				</a>
+
+				<a href="https://code.visualstudio.com/">
+					<img
+						src="../src/assets/images/btn/vscode.png"
+						alt="vs code button"
+					/>
+				</a>
+
+				<a href="https://www.youtube.com/@Petscop/videos">
+					<img
+						src="../src/assets/images/btn/petscop.png"
+						alt="petscop button"
+					/>
+				</a>
+
+				<a>
+					<img
+						src="../src/assets/images/btn/computer.png"
+						alt="this website is best viewed on a computer"
+					/>
+				</a>
+
+				<br>
+				<span>&#169; 2023-2025 lunaui. All Rights Reserved.</span>
+				<br>
+
+				<span id="contact">
+					<a href="mailto:contact@lunaui.cc">contact@lunaui.cc</a>
+					 | 
+					<a href="/lunaui.gpg">pgp public key</a>
+				</span>
+			</footer>
+
+			<div class="circles">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+
+		</main>
+
+		<div id="mobile-modal-container">
+			<fieldset id="mobile-modal" class="box-container">
+				<legend>erm...</legend>
+				<p><b>mobile layout detected.</b></p>
+				<p>my site's layout is <b>not</b> designed for mobile use or small screens and will absolutely explode. it's best to come back when you have
+					access to a computer or laptop.</p>
+				<p>if you're on a tablet, you can try rotating it to landscape mode.</p>
+				<br>
+				<p id="ignore-mobile-p"><a id="ignore-mobile">continue anyways</a></p>
+			</fieldset>
+		</div>
+
+		<span id="circle" class="circle"></span>
+
+		<script src="../scripts/commit.js"></script>
+		<script src="../scripts/music.js"></script>
+		<script src="../scripts/oneko.js"></script>
+		<script src="../scripts/cursor.js"></script>
+		<script src="../scripts/commit.js"></script>
+		<script src="../scripts/mobile.js"></script>
+		<script src="../scripts/script.js"></script>
+        <script is:inline src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	</body>
+</html>
