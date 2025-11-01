@@ -1,4 +1,4 @@
-var music = new Audio('res/sounds/mtky.mp3');
+var music = new Audio('/src/assets/sounds/mtky.mp3');
 var hasPlayed = false;
 var nowPlayingButton = document.getElementById('now-playing-button');
 var nowPlayingText = document.getElementById('now-playing');

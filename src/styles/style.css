@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'Yuruka';
-    src: local("FOT-Yuruka Std UB Black"), url('/res/Yuruka.ttf') format('truetype');
+    src: local("FOT-Yuruka Std UB Black"), url('/Yuruka.ttf') format('truetype');
 }
 
 body, html {
@@ -23,8 +23,8 @@ body::-webkit-scrollbar {
 
 main {
     padding: 5vh 20vw;
-    display: none;
     gap: 0.5em 0.5em;
+    display:grid;
     grid-template:
         "logo logo top-nav top-nav top-nav"minmax(0, 1fr) 
         "ticker ticker ticker ticker ticker"minmax(0, 0.4fr) 

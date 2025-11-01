@@ -1,0 +1,22 @@
+---
+import { getCommitData } from '../lib/github.js'
+const commitData = await getCommitData();
+---
+
+<fieldset id="side-nav" class="box-container">
+  <legend>current commit</legend>
+  <span id="commit">
+    <a href={`https://github.com/lunauii/nekoweb/commit/${commitData.sha}`}>
+      {commitData.sha.slice(0, 7)} <i class="fa-brands fa-github commit-icon"></i>
+    </a>
+  </span>
+  <hr>
+  <small id="commit-date">{commitData.date}</small>
+  <br>
+  <small id="git-diff">
+    <span id="diff-add">+{commitData.additions}</span>
+    <span id="diff-del">-{commitData.deletions}</span>
+    <small style="color:rgba(136, 122, 137, 0.7);"> lines changed</small>
+  </small>
+  <p id="commit-message">{commitData.message}</p>
+</fieldset>

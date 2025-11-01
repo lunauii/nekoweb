@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("blog");
+const tags = [...new Set(allPosts.map((post: any) => post.data.tags).flat())];
+---
+<style>
+    a {
+        color: #00539F;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        margin: 0.25em;
+        border: dotted 1px #a1a1a1;
+        border-radius: .5em;
+        padding: .5em 1em;
+        font-size: 1.15em;
+        background-color: #F8FCFD;
+    }
+</style>
+
+<h1>Posts By Tags</h1>
+
+<div class="tags">
+    {tags.map((tag) => (
+        <p class="tag"><a href={`/posts/tags/${tag}`}>{tag}</a></p>
+    ))}
+</div>
