@@ -25,6 +25,6 @@ jobs:
         uses: indiefellas/deploy2nekoweb@main
         with:
           nekoweb-api-key: ${{ secrets.NEKOWEB_API_KEY }}
-          nekoweb-domain: 'lunaui.nekoweb.org'  
+          nekoweb-domain: 'neko.lunaui.cc'  
           nekoweb-username: 'lunaui'       
           directory: 'dist'  
