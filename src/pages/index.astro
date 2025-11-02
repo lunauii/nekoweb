@@ -2,6 +2,13 @@
 import SourceNotice from "../components/SourceNotice.astro"
 import Partial from "../components/Partial.astro"
 import CommitInfo from "../components/CommitInfo.astro"
+import ImageButton from "../components/ImageButton.astro"
+import MobileModal from "../components/MobileModal.astro"
+
+import "../styles/circle-bg.css"
+import "../styles/cursor-circle.css"
+import "../styles/style.css"
+import "../styles/global.css"
 ---
 
 <!doctype html>
@@ -55,11 +62,6 @@ import CommitInfo from "../components/CommitInfo.astro"
 
 		<!-- 3rd party scripts -->
 		<script is:inline src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-		<!-- personal css and heading scripts -->
-		<link rel="stylesheet" href="../src/styles/style.css" />
-		<link rel="stylesheet" href="../src/styles/cursor-circle.css" />
-		<link rel="stylesheet" href="../src/styles/circle-bg.css" />
 	</head>
 
 	<body>
@@ -133,95 +135,32 @@ import CommitInfo from "../components/CommitInfo.astro"
 
             <fieldset id="button-container-box" class="box-container">
                 <legend>my button</legend>
-                <a href="https://neko.lunaui.cc">
-                    <img
-                    src="../src/assets/images/button.gif"
-                    height="31"
-                    width="88"
-                    style="image-rendering:pixelated;"
-                    />
-                </a>
+                <ImageButton url="https://neko.lunaui.cc" img="../src/assets/images/button.gif" attribution="button by lunaui.cc" alt="Neko button" />
                 <br />
                 <small>feel free to hotlink!</small>
-                <textarea id="button-field" readonly onclick="this.select()">
-                    &lt;a href="https://neko.lunaui.cc"&gt;
-                    &lt;img
-                        src="../src/assets/images/hotlink-ok/button.gif"
-                        height="31"
-                        width="88"
-                        style="image-rendering:pixelated;"
-                    /&gt;
-                    &lt;/a&gt;
-                    &lt;!-- button by lunaui.cc --&gt;
+                <textarea id="button-field" readonly onclick="this.select()" style="white-space: pre; tab-size: 0; -moz-tab-size: 0;">
+					&lt;a href="https://neko.lunaui.cc"&gt;
+					&lt;img
+					src="https://neko.lunaui.cc/hotlink-ok/button.gif"
+					height="31"
+					width="88"
+					style="image-rendering:pixelated;"
+					/&gt;
+					&lt;/a&gt;
+					&lt;!-- button by lunaui.cc --&gt;
                 </textarea>
             </fieldset>
 
 			<footer id="footer">
-				<a href="https://nekoweb.org/">
-					<img
-						src="https://nekoweb.org/assets/buttons/button11.gif"
-					/>
-				</a>
-				<!-- button by milkyway.moe -->
-
-				<a href="https://neko.lunaui.cc">
-					<img
-						src="../src/assets/images/button.gif"
-						height="31"
-						width="88"
-						style="image-rendering:pixelated;"
-					/>
-				</a>
-				<!-- button by lunaui.cc -->
-
-				<a href="https://undertale.com/">
-					<img
-						src="../src/assets/images/btn/undertale.png"
-						alt="this webmaster loves undertale button"
-					/>
-				</a>
-
-				<a href="https://archlinux.org/">
-					<img
-						src="../src/assets/images/btn/arch2.png"
-						alt="arch user button"
-					/>
-				</a>
-
-				<a href="https://osu.ppy.sh/users/14048928">
-					<img
-						src="../src/assets/images/btn/osu.png"
-						alt="osu user button by ThinLiquid"
-					/>
-				</a>
-
-				<a href="https://joo.sh">
-					<img
-						src="../src/assets/images/btn/plasma.png"
-						alt="joo.sh's plasma button"
-					/>
-				</a>
-
-				<a href="https://code.visualstudio.com/">
-					<img
-						src="../src/assets/images/btn/vscode.png"
-						alt="vs code button"
-					/>
-				</a>
-
-				<a href="https://www.youtube.com/@Petscop/videos">
-					<img
-						src="../src/assets/images/btn/petscop.png"
-						alt="petscop button"
-					/>
-				</a>
-
-				<a>
-					<img
-						src="../src/assets/images/btn/computer.png"
-						alt="this website is best viewed on a computer"
-					/>
-				</a>
+				<ImageButton url="https://nekoweb.org/" img="https://nekoweb.org/assets/buttons/button11.gif" attribution="button by milkyway.moe" alt="Nekoweb button"/>
+				<ImageButton url="https://neko.lunaui.cc" img="../src/assets/images/button.gif" attribution="button by lunaui.cc" alt="Neko button" />
+				<ImageButton url="https://undertale.com/" img="../src/assets/images/btn/undertale.png" attribution="this webmaster loves undertale button" alt="Undertale button" />
+				<ImageButton url="https://archlinux.org/" img="../src/assets/images/btn/arch2.png" attribution="arch user button" alt="Arch Linux button" />
+				<ImageButton url="https://osu.ppy.sh/users/14048928" img="../src/assets/images/btn/osu.png" attribution="osu user button by ThinLiquid" alt="osu! button" />
+				<ImageButton url="https://joo.sh" img="../src/assets/images/btn/plasma.png" attribution="joo.sh's plasma button" alt="Plasma button" />
+				<ImageButton url="https://code.visualstudio.com/" img="../src/assets/images/btn/vscode.png" attribution="vs code button" alt="VS Code button" />
+				<ImageButton url="https://www.youtube.com/@Petscop/videos" img="../src/assets/images/btn/petscop.png" attribution="petscop button" alt="Petscop button" />
+				<ImageButton img="/src/assets/images/btn/computer.png" attribution="this website is best viewed on a computer" alt="This website is best viewed on a computer" />
 
 				<br>
 				<span>&#169; 2023-2025 lunaui. All Rights Reserved.</span>
@@ -249,17 +188,7 @@ import CommitInfo from "../components/CommitInfo.astro"
 
 		</main>
 
-		<div id="mobile-modal-container">
-			<fieldset id="mobile-modal" class="box-container">
-				<legend>erm...</legend>
-				<p><b>mobile layout detected.</b></p>
-				<p>my site's layout is <b>not</b> designed for mobile use or small screens and will absolutely explode. it's best to come back when you have
-					access to a computer or laptop.</p>
-				<p>if you're on a tablet, you can try rotating it to landscape mode.</p>
-				<br>
-				<p id="ignore-mobile-p"><a id="ignore-mobile">continue anyways</a></p>
-			</fieldset>
-		</div>
+		<MobileModal/>
 
 		<span id="circle" class="circle"></span>
 
