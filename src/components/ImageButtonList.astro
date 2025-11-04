@@ -1,0 +1,39 @@
+---
+import ImageButton from "./ImageButton.astro";
+
+import buttonData from "../assets/data/buttonData.json"
+
+const matches: Record<string, any> = import.meta.glob('/src/assets/images/btn/**/*.{jpg,jpeg,png,gif}', { 
+  eager: true,
+});
+
+const images = Object.values(matches).map(module => {
+  const image = module.default;
+  
+  const filename = image.src.split('/').pop() || '';
+  const idMatch = filename.match(/^(\d{3})/);
+  const id = idMatch ? idMatch[1] : '';
+  
+  const metadata = buttonData[id as keyof typeof buttonData];
+  const name = filename
+    .replace(/^\d+-/, '')
+    .replace(/\.[^/.]+$/, '');
+
+  return {
+    src: image.src,
+    url: metadata?.url, 
+    attribution: metadata?.attr ? `button by ${metadata.attr}` : null,
+    alt: metadata?.alt || `${name} button`
+  };
+});
+---
+
+<div class="pixel-art-container">
+  {images.map((image) => (
+    <ImageButton 
+    img={image.src} 
+    url={image.url} 
+    attribution={image.attribution}
+    alt={image.alt}/>
+  ))}
+</div>

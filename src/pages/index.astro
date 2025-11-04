@@ -2,13 +2,16 @@
 import SourceNotice from "../components/SourceNotice.astro"
 import Partial from "../components/Partial.astro"
 import CommitInfo from "../components/CommitInfo.astro"
-import ImageButton from "../components/ImageButton.astro"
+import ImageButtonList from "../components/ImageButtonList.astro"
 import MobileModal from "../components/MobileModal.astro"
+import ImageButton from "../components/ImageButton.astro"
 
 import "../styles/circle-bg.css"
 import "../styles/cursor-circle.css"
 import "../styles/style.css"
 import "../styles/global.css"
+
+import ILunauiLogo from '@images/luna-logo.png'
 ---
 
 <!doctype html>
@@ -69,7 +72,7 @@ import "../styles/global.css"
 		<main>
 			<div id="logo">
 				<img
-					src="../src/assets/images/luna-logo.png"
+					src={ILunauiLogo.src}
 					alt="Lunaui Logo"
 				/>
 			</div>
@@ -92,12 +95,12 @@ import "../styles/global.css"
 
 			<div id="ticker">
 				<label for="inline-bar" style="color:#fcd4e0">
-					Layout v2 Progress
+					Layout v2.1 (Astro Rewrite) Progress
 				</label>
 				<div id="inline-bar">
 					<div class="progress-border">
-						<div class="progress-bar" style="height:24px;width:80%">
-							80%
+						<div class="progress-bar" style="height:24px;width:60%">
+							60%
 						</div>
 					</div>
 				</div>
@@ -106,7 +109,7 @@ import "../styles/global.css"
 
 			<fieldset id="nekolink" class="box-container">
 				<legend>nekolink</legend>
-				<iframe width="190" height="190" style="border:none" title="nekolink" src="https://rice.nekoweb.org/nekolink.html"></iframe>
+				<iframe width="200" height="200" style="border:none" src="https://rubybulbs.net/neko.html"></iframe>
 			</fieldset>
 
 			<fieldset id="content" class="box-container">
@@ -135,7 +138,7 @@ import "../styles/global.css"
 
             <fieldset id="button-container-box" class="box-container">
                 <legend>my button</legend>
-                <ImageButton url="https://neko.lunaui.cc" img="../src/assets/images/button.gif" attribution="button by lunaui.cc" alt="Neko button" />
+                <ImageButton url="https://neko.lunaui.cc" img="/hotlink-ok/button.gif" attribution="button by lunaui.cc" alt="Neko button" />
                 <br />
                 <small>feel free to hotlink!</small>
                 <textarea id="button-field" readonly onclick="this.select()" style="white-space: pre; tab-size: 0; -moz-tab-size: 0;">
@@ -152,16 +155,7 @@ import "../styles/global.css"
             </fieldset>
 
 			<footer id="footer">
-				<ImageButton url="https://nekoweb.org/" img="https://nekoweb.org/assets/buttons/button11.gif" attribution="button by milkyway.moe" alt="Nekoweb button"/>
-				<ImageButton url="https://neko.lunaui.cc" img="../src/assets/images/button.gif" attribution="button by lunaui.cc" alt="Neko button" />
-				<ImageButton url="https://undertale.com/" img="../src/assets/images/btn/undertale.png" attribution="this webmaster loves undertale button" alt="Undertale button" />
-				<ImageButton url="https://archlinux.org/" img="../src/assets/images/btn/arch2.png" attribution="arch user button" alt="Arch Linux button" />
-				<ImageButton url="https://osu.ppy.sh/users/14048928" img="../src/assets/images/btn/osu.png" attribution="osu user button by ThinLiquid" alt="osu! button" />
-				<ImageButton url="https://joo.sh" img="../src/assets/images/btn/plasma.png" attribution="joo.sh's plasma button" alt="Plasma button" />
-				<ImageButton url="https://code.visualstudio.com/" img="../src/assets/images/btn/vscode.png" attribution="vs code button" alt="VS Code button" />
-				<ImageButton url="https://www.youtube.com/@Petscop/videos" img="../src/assets/images/btn/petscop.png" attribution="petscop button" alt="Petscop button" />
-				<ImageButton img="/src/assets/images/btn/computer.png" attribution="this website is best viewed on a computer" alt="This website is best viewed on a computer" />
-
+				<ImageButtonList/>
 				<br>
 				<span>&#169; 2023-2025 lunaui. All Rights Reserved.</span>
 				<br>

@@ -1,15 +1,15 @@
 ---
 interface Props {
-    url?: string | URL;
     img: string;
-    attribution: string;
-    alt: string;
+    url?: string | URL | null;
+    attribution?: string | null;
+    alt?: string | null;
 }
 
 const {url, img, attribution, alt} = Astro.props as Props;
 ---
 {url ? (
-    <a href={url}>
+    <a href={url} target="_blank">
         <img
             src={img}
             height="31"

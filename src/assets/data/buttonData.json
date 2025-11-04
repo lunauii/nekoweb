@@ -1,0 +1,42 @@
+{
+    "001": {
+        "url": "https://archlinux.org/",
+        "alt": "Arch Linux button",
+        "attr": null
+    },
+    "002": {
+        "url": null,
+        "alt": "Lunaui button",
+        "attr": "lunaui"
+    },
+    "003": {
+        "url": null,
+        "alt": "This website is best used on a computer! button",
+        "attr": null
+    },
+    "004": {
+        "url": "https://osu.ppy.sh/beatmapsets/2440824#osu/5324416",
+        "alt": "osu! button",
+        "attr": "ThinLiquid"
+    },
+    "005": {
+        "url": "https://en.wikipedia.org/wiki/Petscop",
+        "alt": "Petscop button",
+        "attr": null
+    },
+    "006": {
+        "url": "https://joo.sh/",
+        "alt": "joo.sh's plasma button",
+        "attr": "joo.sh"
+    },
+    "007": {
+        "url": "https://undertale.com/",
+        "alt": "Undertale button",
+        "attr": null
+    },
+    "008": {
+        "url": "https://code.visualstudio.com/",
+        "alt": "VS Code button",
+        "attr": null
+    }
+}
