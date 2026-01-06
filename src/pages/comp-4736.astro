@@ -1,0 +1,76 @@
+---
+const { targetTime = "16:20:00"} = Astro.props;
+---
+<div class="timer-container">
+  <div class="timer-card">
+    <p class="label">time remaining</p>
+    <div id="timer" class="timer-display">
+      <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ targetTime }}>
+  function updateTimer() {
+    const now = new Date();
+    const [tHours, tMinutes, tSeconds] = targetTime.split(':').map(Number);
+    
+    let target = new Date();
+    target.setHours(tHours, tMinutes, tSeconds, 0);
+
+    if (now >= target) {
+      target.setDate(target.getDate() + 1);
+    }
+
+    const diff = target - now;
+
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+    document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+    document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+</script>
+
+<style>
+    html {
+        background:#302234
+    }
+
+  .timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #302234; 
+    margin: 0;
+  }
+
+  .timer-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 2px #9E7EA6 dashed;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  .label {
+    letter-spacing: 0.1em;
+    font-size: 0.875rem;
+    color: #b094b8;
+    margin-bottom: 1rem;
+  }
+
+  .timer-display {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 4rem; 
+    font-weight: 700;
+    color: #CAA8CD;
+  }
+</style>
