@@ -7,6 +7,9 @@ const { targetTime = "16:20:00"} = Astro.props;
     <div id="timer" class="timer-display">
       <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
     </div>
+    <div class="action-area">
+      <a href="https://docs.google.com/document/d/1riiBDUsTZ20EjI6J6ULSatW4nZNvHjp5hh8aTI7grzM/edit?usp=sharing" target="_blank" class="placeholder-link">- bible the threequel -</a>
+    </div>
   </div>
 </div>
 
@@ -72,5 +75,26 @@ const { targetTime = "16:20:00"} = Astro.props;
     font-size: 4rem; 
     font-weight: 700;
     color: #CAA8CD;
+  }
+
+  .action-area {
+    margin-top: 1rem;
+  }
+
+  .placeholder-link {
+    display: inline-block;
+    color: #9E7EA6;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: 2px solid #9E7EA6;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+  }
+
+  .placeholder-link:hover {
+    background-color: #9E7EA6;
+    color: #0f172a;
+    transform: translateY(-2px);
   }
 </style>
