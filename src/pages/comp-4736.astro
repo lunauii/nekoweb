@@ -1,36 +1,66 @@
 ---
-const { targetTime = "16:20:00"} = Astro.props;
+import BGCircles from "../components/BGCircles.astro";
+
+const { targetDay = 2, targetTime = "15:00:00" } = Astro.props;
 ---
 <div class="timer-container">
   <div class="timer-card">
-    <p class="label">time remaining</p>
+    <p class="label">This week's class ends in:</p>
+    
     <div id="timer" class="timer-display">
-      <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+      <div class="time-segment"><span id="days">00</span></div>:
+      <div class="time-segment"><span id="hours">00</span></div>:
+      <div class="time-segment"><span id="minutes">00</span></div>:
+      <div class="time-segment"><span id="seconds">00</span></div>
     </div>
+
+    <p id="rest-message" class="rest-message hidden">have a good rest of the week! :D</p>
+
     <div class="action-area">
-      <a href="https://docs.google.com/document/d/1riiBDUsTZ20EjI6J6ULSatW4nZNvHjp5hh8aTI7grzM/edit?usp=sharing" target="_blank" class="placeholder-link">- bible the threequel -</a>
+      <a href="#" class="placeholder-link">bible: the third</a>
     </div>
   </div>
 </div>
 
-<script define:vars={{ targetTime }}>
+<BGCircles></BGCircles>
+
+<script define:vars={{ targetDay, targetTime }}>
   function updateTimer() {
     const now = new Date();
     const [tHours, tMinutes, tSeconds] = targetTime.split(':').map(Number);
     
     let target = new Date();
     target.setHours(tHours, tMinutes, tSeconds, 0);
+    let daysUntilTarget = (targetDay - now.getDay() + 7) % 7;
+    if (daysUntilTarget === 0 && now >= target) daysUntilTarget = 7;
+    target.setDate(now.getDate() + daysUntilTarget);
 
-    if (now >= target) {
-      target.setDate(target.getDate() + 1);
+    let reset = new Date();
+    reset.setHours(0, 0, 0, 0);
+    let daysUntilReset = (1 - now.getDay() + 7) % 7; 
+    if (daysUntilReset === 0 && now >= reset) daysUntilReset = 7;
+    reset.setDate(now.getDate() + daysUntilReset);
+
+    const timerEl = document.getElementById('timer');
+    const msgEl = document.getElementById('rest-message');
+    
+    let d = 0, h = 0, m = 0, s = 0;
+
+    if (reset < target) {
+      timerEl.classList.add('darkened');
+      msgEl.classList.remove('hidden');
+    } else {
+      timerEl.classList.remove('darkened');
+      msgEl.classList.add('hidden');
+      
+      const diff = target - now;
+      d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      m = Math.floor((diff / (1000 * 60)) % 60);
+      s = Math.floor((diff / 1000) % 60);
     }
 
-    const diff = target - now;
-
-    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const m = Math.floor((diff / (1000 * 60)) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-
+    document.getElementById('days').innerText = d.toString().padStart(2, '0');
     document.getElementById('hours').innerText = h.toString().padStart(2, '0');
     document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
     document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
@@ -41,9 +71,9 @@ const { targetTime = "16:20:00"} = Astro.props;
 </script>
 
 <style>
-    html {
-        background:#302234
-    }
+  html {
+      background:#312235;
+  }
 
   .timer-container {
     display: flex;
@@ -51,7 +81,7 @@ const { targetTime = "16:20:00"} = Astro.props;
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    background-color: #302234; 
+    background-color: #312235;
     margin: 0;
   }
 
@@ -60,6 +90,7 @@ const { targetTime = "16:20:00"} = Astro.props;
     padding: 2rem;
     border-radius: 1rem;
     border: 2px #9E7EA6 dashed;
+    background-color: #362938;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
   }
 
@@ -67,14 +98,49 @@ const { targetTime = "16:20:00"} = Astro.props;
     letter-spacing: 0.1em;
     font-size: 0.875rem;
     color: #b094b8;
-    margin-bottom: 1rem;
   }
 
   .timer-display {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', monospace;
     font-size: 4rem; 
     font-weight: 700;
     color: #CAA8CD;
+    display: flex;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    background: linear-gradient(
+      to bottom,
+      #fcfaff 0%,
+      #CAA8CD 45%,
+      #8c6a8f 80%,
+      #CAA8CD 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .timer-display.darkened {
+    opacity: 0.4;
+    background: #CAA8CD;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .rest-message {
+    color: #CAA8CD;
+    font-family: 'Courier New', monospace;
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .time-segment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .action-area {
@@ -94,7 +160,7 @@ const { targetTime = "16:20:00"} = Astro.props;
 
   .placeholder-link:hover {
     background-color: #9E7EA6;
-    color: #0f172a;
+    color: #200f2a;
     transform: translateY(-2px);
   }
 </style>
