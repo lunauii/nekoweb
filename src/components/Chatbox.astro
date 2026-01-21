@@ -1,0 +1,168 @@
+<div class="chat-wrapper">
+  <div id="chat-messages" class="messages-area"></div>
+  
+  <div class="input-grid">
+    <input type="text" id="username-input" placeholder="Name" maxlength="15" />
+    <input type="color" id="color-input" value="#5865F2" />
+    <input type="text" id="msg-input" placeholder="Send a message..." maxlength="200" />
+    <button id="send-btn">Send</button>
+  </div>
+</div>
+
+<script>
+  import { io, Socket } from "socket.io-client";
+
+  interface ChatMessage {
+    id: number;
+    username: string;
+    color: string;
+    text: string;
+    timestamp: string;
+  }
+
+  const socket: Socket = io("https://neko-socket-api.lunaui.cc");
+
+  const msgList = document.getElementById("chat-messages") as HTMLDivElement;
+  const msgInput = document.getElementById("msg-input") as HTMLInputElement;
+  const sendBtn = document.getElementById("send-btn") as HTMLButtonElement;
+  const nameInput = document.getElementById("username-input") as HTMLInputElement;
+  const colorInput = document.getElementById("color-input") as HTMLInputElement;
+
+  const addMessage = (msg: ChatMessage): void => {
+    const div = document.createElement("div");
+    div.className = "msg-row";
+    
+    div.innerHTML = `
+      <span class="timestamp">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+      <span class="user" style="color: ${msg.color}">${msg.username}:</span>
+      <span class="text">${msg.text}</span>
+    `;
+    
+    msgList.appendChild(div);
+    msgList.scrollTop = msgList.scrollHeight;
+  };
+
+  const loadPrefs = (): void => {
+    const saved = localStorage.getItem("chat_prefs");
+    if (saved) {
+      const { name, color } = JSON.parse(saved);
+      if (name) nameInput.value = name;
+      if (color) colorInput.value = color;
+    }
+  };
+
+  socket.on("history", (history: ChatMessage[]) => {
+    msgList.innerHTML = ""; 
+    history.forEach(addMessage);
+  });
+
+  socket.on("new_message", (msg: ChatMessage) => {
+    addMessage(msg);
+  });
+
+  const sendMessage = (): void => {
+    const text = msgInput.value.trim();
+    const username = nameInput.value.trim() || "Anon";
+    const color = colorInput.value;
+
+    if (!text) return;
+
+    localStorage.setItem("chat_prefs", JSON.stringify({ name: username, color }));
+
+    socket.emit("send_message", { username, color, text });
+    msgInput.value = "";
+  };
+
+  sendBtn.addEventListener("click", sendMessage);
+  msgInput.addEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key === "Enter") sendMessage();
+  });
+
+  loadPrefs();
+</script>
+
+<style>
+  .chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+  }
+
+  .messages-area {
+    flex-grow: 1;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #4a3b52;
+    scrollbar-width: thin;
+    scrollbar-color: #9E7EA6 #200f2a;
+  }
+
+  .messages-area::-webkit-scrollbar { width: 8px; }
+  .messages-area::-webkit-scrollbar-thumb { background: #9E7EA6; border-radius: 4px; }
+  .messages-area::-webkit-scrollbar-track { background: #200f2a; }
+  .input-grid {
+    display: grid;
+    grid-template-columns: 70px 30px 1fr auto; 
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input[type="text"] {
+    background: #200f2a;
+    border: 1px solid #9E7EA6;
+    color: #eaddf0;
+    padding: 8px;
+    border-radius: 4px;
+    font-family: inherit;
+    min-width: 0; 
+  }
+
+  #msg-input {
+    width: 100%;
+  }
+  
+  input[type="text"]::placeholder { color: #6a5a70; }
+
+  input[type="color"] {
+    border: none;
+    width: 100%;
+    height: 100%; 
+    background: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  button {
+    background: #9E7EA6;
+    color: #200f2a;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    padding: 0 0.8rem; 
+    white-space: nowrap;
+  }
+
+  button:hover { background: #CAA8CD; }
+</style>
+
+<style is:global>
+  .msg-row {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-break: break-word;
+    margin-bottom: 4px;
+    text-align: left;
+  }
+
+  .msg-row .timestamp { color: #b094b8; font-size: 0.75rem; margin-right: 5px; }
+  .msg-row .user { font-weight: 700; margin-right: 5px; }
+  .msg-row .text { color: #eaddf0; }
+</style>

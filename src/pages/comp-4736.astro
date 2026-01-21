@@ -1,7 +1,8 @@
 ---
 import BGCircles from "../components/BGCircles.astro";
+import Chatbox from "../components/Chatbox.astro";
 
-const { targetDay = 2, targetTime = "16:30:00" } = Astro.props;
+const { targetDay = 2, targetTime = "16:20:00" } = Astro.props;
 ---
 <div class="timer-container">
   <div class="timer-card">
@@ -23,7 +24,19 @@ const { targetDay = 2, targetTime = "16:30:00" } = Astro.props;
         target="_blank">
         bible: the third
       </a>
+    </div>
+    <button id="chat-toggle-btn" class="chat-toggle">
+      <span class="icon">c!</span>
+    </button>
 
+    <div id="chat-drawer" class="chat-drawer">
+      <div class="drawer-header">
+        <h3>Chat</h3>
+        <button id="chat-close-btn" class="close-btn">[X]</button>
+      </div>
+      <div class="drawer-content">
+        <Chatbox />
+      </div>
     </div>
   </div>
 </div>
@@ -33,6 +46,17 @@ const { targetDay = 2, targetTime = "16:30:00" } = Astro.props;
 <script src="../scripts/oneko.js"></script>
 
 <script define:vars={{ targetDay, targetTime }}>
+  const drawer = document.getElementById('chat-drawer');
+  const toggleBtn = document.getElementById('chat-toggle-btn');
+  const closeBtn = document.getElementById('chat-close-btn');
+
+  function toggleChat() {
+    if (drawer) drawer.classList.toggle('open');
+  }
+
+  if (toggleBtn) toggleBtn.addEventListener('click', toggleChat);
+  if (closeBtn) closeBtn.addEventListener('click', toggleChat);
+
   function updateTimer() {
     const now = new Date();
     const [tHours, tMinutes, tSeconds] = targetTime.split(':').map(Number);
@@ -55,11 +79,11 @@ const { targetDay = 2, targetTime = "16:30:00" } = Astro.props;
     let d = 0, h = 0, m = 0, s = 0;
 
     if (reset < target) {
-      timerEl.classList.add('darkened');
-      msgEl.classList.remove('hidden');
+      if (timerEl) timerEl.classList.add('darkened');
+      if (msgEl) msgEl.classList.remove('hidden');
     } else {
-      timerEl.classList.remove('darkened');
-      msgEl.classList.add('hidden');
+      if (timerEl) timerEl.classList.remove('darkened');
+      if (msgEl) msgEl.classList.add('hidden');
       
       const diff = target - now;
       d = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -68,10 +92,15 @@ const { targetDay = 2, targetTime = "16:30:00" } = Astro.props;
       s = Math.floor((diff / 1000) % 60);
     }
 
-    document.getElementById('days').innerText = d.toString().padStart(2, '0');
-    document.getElementById('hours').innerText = h.toString().padStart(2, '0');
-    document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
-    document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+    const setVal = (id, val) => {
+        const el = document.getElementById(id);
+        if(el) el.innerText = val.toString().padStart(2, '0');
+    }
+
+    setVal('days', d);
+    setVal('hours', h);
+    setVal('minutes', m);
+    setVal('seconds', s);
   }
 
   updateTimer();
@@ -79,9 +108,7 @@ const { targetDay = 2, targetTime = "16:30:00" } = Astro.props;
 </script>
 
 <style>
-  html {
-      background:#312235;
-  }
+  html { background:#312235; }
 
   .timer-container {
     display: flex;
@@ -89,7 +116,6 @@ const { targetDay = 2, targetTime = "16:30:00" } = Astro.props;
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    background-color: #312235;
     margin: 0;
   }
 
@@ -102,12 +128,82 @@ const { targetDay = 2, targetTime = "16:30:00" } = Astro.props;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
   }
 
-  .label {
-    letter-spacing: 0.1em;
-    font-size: 0.875rem;
-    color: #b094b8;
+  .chat-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
+    background: #362938;
+    border: 2px dashed #9E7EA6;
+    color: #CAA8CD;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   }
 
+  .chat-toggle:hover {
+    transform: scale(1.1);
+    background: #9E7EA6;
+    color: #312235;
+  }
+
+  .chat-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    max-width: 90vw;
+    height: 100vh;
+    background: #362938;
+    border-left: 2px dashed #9E7EA6;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    z-index: 101;
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-drawer.open {
+    right: 0;
+  }
+
+  .drawer-header {
+    padding: 1rem;
+    border-bottom: 2px dashed #4a3b52;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #CAA8CD;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .drawer-header h3 { margin: 0; }
+
+  .close-btn {
+    background: none;
+    border: none;
+    color: #9E7EA6;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .drawer-content {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow: hidden;
+  }
+
+  .label { 
+    letter-spacing: 0.1em; font-size: 0.875rem; color: #b094b8; 
+  }
+  
   .timer-display {
     font-family: 'Courier New', monospace;
     font-size: 4rem; 
@@ -115,46 +211,21 @@ const { targetDay = 2, targetTime = "16:30:00" } = Astro.props;
     color: #CAA8CD;
     display: flex;
     gap: 1rem;
-    transition: all 0.3s ease;
-    background: linear-gradient(
-      to bottom,
-      #fcfaff 0%,
-      #CAA8CD 45%,
-      #8c6a8f 80%,
-      #CAA8CD 100%
-    );
+    justify-content: center;
+    background: linear-gradient(to bottom, #fcfaff 0%, #CAA8CD 45%, #8c6a8f 80%, #CAA8CD 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .timer-display.darkened {
-    opacity: 0.4;
-    background: #CAA8CD;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  @media (max-width: 600px) {
+    .timer-display { font-size: 2.5rem; gap: 0.5rem; }
   }
 
-  .rest-message {
-    color: #CAA8CD;
-    font-family: 'Courier New', monospace;
-    margin: 0;
-    font-size: 1rem;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  .time-segment {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .action-area {
-    margin-top: 1rem;
-  }
-
+  .timer-display.darkened { opacity: 0.4; background: #CAA8CD; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .rest-message { color: #CAA8CD; font-family: 'Courier New', monospace; margin: 0; font-size: 1rem; }
+  .hidden { display: none; }
+  .time-segment { display: flex; flex-direction: column; align-items: center; }
+  .action-area { margin-top: 1rem; }
   .placeholder-link {
     display: inline-block;
     color: #9E7EA6;
@@ -165,10 +236,5 @@ const { targetDay = 2, targetTime = "16:30:00" } = Astro.props;
     padding: 0.5rem 1.5rem;
     border-radius: 9999px;
   }
-
-  .placeholder-link:hover {
-    background-color: #9E7EA6;
-    color: #200f2a;
-    transform: translateY(-2px);
-  }
+  .placeholder-link:hover { background-color: #9E7EA6; color: #200f2a; transform: translateY(-2px); }
 </style>
