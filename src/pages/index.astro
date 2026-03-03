@@ -1,166 +1,33 @@
 ---
+import SiteLayout from "../layouts/SiteLayout.astro"
 import SourceNotice from "../components/SourceNotice.astro"
 import Partial from "../components/Partial.astro"
 import CommitInfo from "../components/CommitInfo.astro"
-import ImageButtonList from "../components/ImageButtonList.astro"
-import MobileModal from "../components/MobileModal.astro"
-import ImageButton from "../components/ImageButton.astro"
-
-import "../styles/cursor-circle.css"
-import "../styles/style.css"
-import "../styles/theme.css"
-import "../styles/global.css"
-
-import ILunauiLogo from '@images/luna-logo.png'
-import BGCircles from "../components/BGCircles.astro"
-import CommonHeader from "../components/CommonHeader.astro"
+import Logo from "../components/Logo.astro"
+import TopNav from "../components/TopNav.astro"
+import ProgressTicker from "../components/ProgressTicker.astro"
+import Nekolink from "../components/Nekolink.astro"
+import Webrings from "../components/Webrings.astro"
+import MyButton from "../components/LunaButton.astro"
+import Footer from "../components/Footer.astro"
 ---
 
-<!doctype html>
-
-<html lang="en">
-	<head>
-		<CommonHeader>
-
-		<!-- Webrings -->
-		<link
-			rel="stylesheet"
-			href="https://webring.nekoweb.org/onionring.css"
-		/>
-
-		<!-- 3rd party CDNs -->
-		<link
-			href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-			rel="stylesheet"
-		/>
-
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-			integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
-			crossorigin="anonymous"
-			referrerpolicy="no-referrer"
-		/>
-
-		<!-- 3rd party scripts -->
-		<script is:inline src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	</head>
-
-	<body>
+<SiteLayout>
     <SourceNotice/>
-		<main>
-			<div id="logo">
-				<img
-					src={ILunauiLogo.src}
-					alt="Lunaui Logo"
-				/>
-			</div>
+    <main>
+        <Logo/>
+        <TopNav/>
+        <ProgressTicker/>
+        <Nekolink/>
 
-			<nav id="top-nav">
-				<span id="now-playing">&#9834;ユメガタリ ～ 雨の日トロイメライ ～</span>
-				<span id="now-playing-button"><i class='bx bx-volume-full'></i> play music?</span>
-				<p id="catchphrase">
-					part time programmer, full time lunaui.
-				</p>
-				<p>
-					<a id="me" class="top-nav-btn" href="#">me</a>
-					<a id="projects" class="top-nav-btn" href="#">projects</a>
-					<a id="blog" class="top-nav-btn" href="/blog/">blog</a>
-					<a id="links" class="top-nav-btn" href="#">links</a>
-					<a href="https://lunaui.atabook.org/">guestbook</a>
-					<a href="https://nekoweb.org/follow/lunaui" style="border: none;">[+]</a>
-				</p>
-			</nav>
+        <fieldset id="content" class="box-container">
+            <legend>meow</legend>
+            <Partial/>
+        </fieldset>
 
-			<div id="ticker">
-				<label for="inline-bar" style="color:#d4e0fc">
-					Layout v2.1 (Astro Rewrite) Progress
-				</label>
-				<div id="inline-bar">
-					<div class="progress-border">
-						<div class="progress-bar" style="height:24px;width:60%">
-							60%
-						</div>
-					</div>
-				</div>
-				<span id="progress-placeholder-text">* This bar is temporary and <b>will</b> be replaced!</span>
-			</div>
-
-			<fieldset id="nekolink" class="box-container">
-				<legend>nekolink</legend>
-				<iframe width="200" height="200" style="border:none" src="https://rubybulbs.net/neko.html"></iframe>
-			</fieldset>
-
-			<fieldset id="content" class="box-container">
-				<legend>meow</legend>
-				<Partial/>
-			</fieldset>
-
-			<fieldset id="side-content" class="box-container">
-				<legend>webrings</legend>
-				<div id="smallvocaring">
-					<script src="https://webring.adilene.net/smallwidget.js"></script>
-				</div>
-				<div id="nekowebring">
-					<script
-						type="text/javascript"
-						src="https://webring.nekoweb.org/onionring-variables.js"
-					></script>
-					<script
-						type="text/javascript"
-						src="https://webring.nekoweb.org/onionring-widget.js"
-					></script>
-				</div>
-			</fieldset>
-
-			<CommitInfo/>
-
-            <fieldset id="button-container-box" class="box-container">
-                <legend>my button</legend>
-                <ImageButton url="https://neko.lunaui.cc" img="/hotlink-ok/button.gif" attribution="button by lunaui.cc" alt="Neko button" />
-                <br />
-                <small>feel free to hotlink!</small>
-                <textarea id="button-field" readonly onclick="this.select()" style="white-space: pre; tab-size: 0; -moz-tab-size: 0;">
-					&lt;a href="https://neko.lunaui.cc"&gt;
-					&lt;img
-					src="https://neko.lunaui.cc/hotlink-ok/button.gif"
-					height="31"
-					width="88"
-					style="image-rendering:pixelated;"
-					/&gt;
-					&lt;/a&gt;
-					&lt;!-- button by lunaui.cc --&gt;
-                </textarea>
-            </fieldset>
-
-			<footer id="footer">
-				<ImageButtonList/>
-				<br>
-				<span>&#169; 2023-2025 lunaui. All Rights Reserved.</span>
-				<br>
-
-				<span id="contact">
-					<a href="mailto:contact@lunaui.cc">contact@lunaui.cc</a>
-					 | 
-					<a href="/lunaui.gpg">pgp public key</a>
-				</span>
-			</footer>
-
-			<BGCircles/>
-
-		</main>
-
-		<MobileModal/>
-
-		<span id="circle" class="circle"></span>
-
-		<script src="../scripts/commit.js"></script>
-		<script src="../scripts/music.js"></script>
-		<script src="../scripts/oneko.js"></script>
-		<script src="../scripts/cursor.js"></script>
-		<script src="../scripts/commit.js"></script>
-		<script src="../scripts/mobile.js"></script>
-		<script src="../scripts/script.js"></script>
-        <script is:inline src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-	</body>
-</html>
+        <Webrings/>
+        <CommitInfo/>
+        <MyButton/>
+        <Footer/>
+    </main>
+</SiteLayout>

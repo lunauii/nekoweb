@@ -1,14 +1,16 @@
 ---
-import Social from './Social.astro'
+import ImageButtonList from "./ImageButtonList.astro"
 ---
-<style>
-  footer {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-</style>
 
-<footer>
-    <Social platform="github" username="lunauii" />
+<footer id="footer">
+	<ImageButtonList/>
+	<br>
+	<span>&#169; 2023-2025 lunaui. All Rights Reserved.</span>
+	<br>
+
+	<span id="contact">
+		<a href="mailto:contact@lunaui.cc">contact@lunaui.cc</a>
+		 | 
+		<a href="/lunaui.gpg">pgp public key</a>
+	</span>
 </footer>

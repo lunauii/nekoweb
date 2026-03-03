@@ -1,26 +1,66 @@
 ---
 import { getCollection } from "astro:content";
-import BlogPost from '../components/BlogPost.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Tags from "../components/Tags.astro";
-
-import "../styles/cursor-circle.css"
-import "../styles/theme.css"
-import "../styles/global.css"
+import BlogLayout from "../layouts/BlogLayout.astro";
 
 const allPosts = await getCollection("blog");
-const pageTitle: String = "My Blog";
+const sorted = allPosts.sort((a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const tags = [...new Set(allPosts.map((post: any) => post.data.tags).flat())];
 ---
 
-<BaseLayout>
-    <Tags/>
-    <h1>{pageTitle}</h1>
-        
-    <ul>
-        {
-            allPosts.map((post:any) => (
-                <BlogPost url={`/posts/${post.id}/`} title={post.data.title} />
-            ))
-        }
-    </ul>
-</BaseLayout>
+<BlogLayout pageTitle="blog">
+    <div id="blog-index">
+        <div id="blog-tag-sidebar">
+            <p id="tag-sidebar-label"># tags</p>
+            <ul id="tag-list">
+                <li>
+                    <button class="tag-btn tag-active" data-tag="all">all</button>
+                </li>
+                {tags.map((tag) => (
+                    <li>
+                        <button class="tag-btn" data-tag={tag}>{tag}</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+
+        <div id="blog-post-list">
+            {sorted.map((post: any) => (
+                <div class="blog-entry box-container" data-tags={post.data.tags.join(",")}>
+                    <div class="blog-entry-meta">
+                        <span class="blog-entry-date">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                        <span class="blog-entry-tags">
+                            {post.data.tags.map((tag: string) => (
+                                <span class="blog-tag">{tag}</span>
+                            ))}
+                        </span>
+                    </div>
+                    <a href={`/posts/${post.id}/`} class="blog-entry-title">{post.data.title}</a>
+                    <p class="blog-entry-desc">{post.data.description}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+</BlogLayout>
+
+<script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.tag-btn');
+    const entries = document.querySelectorAll<HTMLElement>('.blog-entry');
+    let activeTag = 'all';
+
+    function filterPosts(tag: string) {
+        entries.forEach((entry) => {
+            const entryTags = entry.dataset.tags?.split(',') ?? [];
+            entry.style.display = (tag === 'all' || entryTags.includes(tag)) ? '' : 'none';
+        });
+    }
+
+    buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const tag = btn.dataset.tag ?? 'all';
+            activeTag = (activeTag === tag) ? 'all' : tag;
+            buttons.forEach((b) => b.classList.remove('tag-active'));
+            document.querySelector<HTMLButtonElement>(`[data-tag="${activeTag}"]`)?.classList.add('tag-active');
+            filterPosts(activeTag);
+        });
+    });
+</script>

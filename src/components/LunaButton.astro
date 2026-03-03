@@ -1,0 +1,21 @@
+---
+import ImageButton from "./ImageButton.astro"
+---
+
+<fieldset id="button-container-box" class="box-container">
+	<legend>my button</legend>
+	<ImageButton url="https://neko.lunaui.cc" img="/hotlink-ok/button.gif" attribution="button by lunaui.cc" alt="Neko button" />
+	<br />
+	<small>feel free to hotlink!</small>
+	<textarea id="button-field" readonly onclick="this.select()" style="white-space: pre; tab-size: 0; -moz-tab-size: 0;">
+&lt;a href="https://neko.lunaui.cc"&gt;
+&lt;img
+src="https://neko.lunaui.cc/hotlink-ok/button.gif"
+height="31"
+width="88"
+style="image-rendering:pixelated;"
+/&gt;
+&lt;/a&gt;
+&lt;!-- button by lunaui.cc --&gt;
+	</textarea>
+</fieldset>

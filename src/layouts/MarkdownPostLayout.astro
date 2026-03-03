@@ -1,37 +1,42 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
+import BlogLayout from "./BlogLayout.astro";
+import ILunauiLogo from "@images/luna-logo.png";
+
 const { frontmatter } = Astro.props;
+
+const imageAssets = import.meta.glob<{ default: { src: string } }>(
+    '/src/assets/images/**/*.{png,jpg,jpeg,gif,webp,avif,svg}',
+    { eager: true }
+);
+
+function resolveBanner(raw: string | undefined): string {
+    if (!raw) return ILunauiLogo.src;
+    const key = raw.startsWith('@images/')
+        ? raw.replace('@images/', '/src/assets/images/')
+        : null;
+    if (key && imageAssets[key]) return imageAssets[key].default.src;
+    return raw;
+}
+
+const banner = resolveBanner(frontmatter.banner);
 ---
-<BaseLayout pageTitle={frontmatter.title}>
-    <p>{frontmatter.pubDate.toLocaleDateString()}</p>
-    <p><em>{frontmatter.description}</em></p>
-    <p>Written by: {frontmatter.author}</p>
 
-    <div class="tags">
-    {frontmatter.tags.map((tag: string) => (
-      <p class="tag"><a href={`/posts/tags/${tag}`}>{tag}</a></p>
-    ))}
-  </div>
-  
-  <slot />
-</BaseLayout>
+<BlogLayout pageTitle="" isPost={true}>
+    <div id="post-banner" style={`--banner-url: url('${banner}')`}>
+        <div id="post-header">
+            <a href="/blog/" id="post-back">&#8592; back to blog</a>
+            <span id="post-date">{frontmatter.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            <h1 id="post-title">{frontmatter.title}</h1>
+            <p id="post-desc">{frontmatter.description}</p>
+            <div id="post-tags">
+                {frontmatter.tags.map((tag: string) => (
+                    <span class="blog-tag">{tag}</span>
+                ))}
+            </div>
+        </div>
+    </div>
 
-<style>
-  a {
-    color: #00539F;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: .5em;
-    padding: .5em 1em;
-    font-size: 1.15em;
-    background-color: #F8FCFD;
-  }
-</style>
+    <div id="post-body">
+        <slot/>
+    </div>
+</BlogLayout>

@@ -1,0 +1,36 @@
+---
+import CommonHeader from "../components/CommonHeader.astro"
+import BGCircles from "../components/BGCircles.astro"
+import MobileModal from "../components/MobileModal.astro"
+import PageScripts from "../components/PageScripts.astro"
+
+import "../styles/cursor-circle.css"
+import "../styles/style.css"
+import "../styles/theme.css"
+import "../styles/global.css"
+
+interface Props {
+    pageTitle?: string;
+}
+
+const { pageTitle } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <CommonHeader/>
+        {pageTitle && <title>{pageTitle} — lunaui</title>}
+    </head>
+    <body>
+        <BGCircles/>
+
+        <div id="site-wrapper">
+            <slot/>
+        </div>
+
+        <MobileModal/>
+        <span id="circle" class="circle"></span>
+        <PageScripts/>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+---
+import SiteLayout from "./SiteLayout.astro"
+import Logo from "../components/Logo.astro"
+import Footer from "../components/Footer.astro"
+
+import "../styles/blog.css"
+import TopNav from "../components/TopNav.astro";
+
+interface Props {
+    pageTitle?: string;
+    isPost?: boolean;
+}
+
+const { pageTitle, isPost = false } = Astro.props;
+---
+
+<SiteLayout>
+    <main id="blog-main">
+        <Logo/>
+
+        <TopNav/>
+
+        <fieldset id="blog-content" class={`box-container${isPost ? ' post-page' : ''}`}>
+            {pageTitle !== "" && <legend>{pageTitle ?? "blog"}</legend>}
+            <slot/>
+        </fieldset>
+
+        <Footer/>
+    </main>
+</SiteLayout>

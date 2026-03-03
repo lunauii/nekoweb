@@ -1,32 +1,59 @@
 ---
 import { getCollection } from "astro:content";
+import BlogLayout from "../layouts/BlogLayout.astro";
+
+export async function getStaticPaths() {
+    const allPosts = await getCollection("blog");
+    const uniqueTags = [...new Set(allPosts.map((post: any) => post.data.tags).flat())];
+
+    return uniqueTags.map((tag) => {
+        const filteredPosts = allPosts.filter((post: any) =>
+            post.data.tags.includes(tag)
+        );
+        return {
+            params: { tag },
+            props: { posts: filteredPosts },
+        };
+    });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const sorted = posts.sort((a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
 const allPosts = await getCollection("blog");
 const tags = [...new Set(allPosts.map((post: any) => post.data.tags).flat())];
 ---
-<style>
-    a {
-        color: #00539F;
-    }
 
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-    }
+<BlogLayout pageTitle={`tag: ${tag}`}>
+    <div id="blog-index">
+        <div id="blog-tag-sidebar">
+            <fieldset class="box-container">
+                <legend># tags</legend>
+                <ul id="tag-list">
+                    <li><a href="/blog/">all</a></li>
+                    {tags.map((t) => (
+                        <li><a href={`/posts/tags/${t}`} class={t === tag ? "tag-active" : ""}>{t}</a></li>
+                    ))}
+                </ul>
+            </fieldset>
+        </div>
 
-    .tag {
-        margin: 0.25em;
-        border: dotted 1px #a1a1a1;
-        border-radius: .5em;
-        padding: .5em 1em;
-        font-size: 1.15em;
-        background-color: #F8FCFD;
-    }
-</style>
-
-<h1>Posts By Tags</h1>
-
-<div class="tags">
-    {tags.map((tag) => (
-        <p class="tag"><a href={`/posts/tags/${tag}`}>{tag}</a></p>
-    ))}
-</div>
+        <div id="blog-post-list">
+            {sorted.map((post: any) => (
+                <div class="blog-entry box-container">
+                    <div class="blog-entry-meta">
+                        <span class="blog-entry-date">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                        <span class="blog-entry-tags">
+                            {post.data.tags.map((t: string) => (
+                                <a href={`/posts/tags/${t}`} class="blog-tag">{t}</a>
+                            ))}
+                        </span>
+                    </div>
+                    <a href={`/posts/${post.id}/`} class="blog-entry-title">{post.data.title}</a>
+                    <p class="blog-entry-desc">{post.data.description}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+</BlogLayout>

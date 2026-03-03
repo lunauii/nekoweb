@@ -1,28 +1,37 @@
 body, html {
-    min-height: 100vh;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    -ms-overflow-style: none;
+}
+
+body {
+    position: relative;
 }
 
 body::-webkit-scrollbar {
     display: none;
 }
 
+#site-wrapper {
+    width: 1060px;
+    margin: 0 auto;
+    padding-bottom: 3vh;
+    box-sizing: border-box;
+}
+
 main {
-    padding: 5vh 20vw;
+    padding: 3vh 0 0 0;
     gap: 0.5em 0.5em;
-    display:grid;
+    display: grid;
     grid-template:
-        "logo logo top-nav top-nav top-nav"minmax(0, 1fr) 
-        "ticker ticker ticker ticker ticker"minmax(0, 0.4fr) 
-        "side-nav content content content content"minmax(0, 1.0fr) 
-        "side-content content content content content"minmax(0, 1.0fr) 
-        "ads content content content content"minmax(0, 1.55fr) 
-        "button-container-box content content content content"minmax(0, 0.85fr) 
+        "logo logo top-nav top-nav top-nav" auto
+        "ticker ticker ticker ticker ticker" auto
+        "side-nav content content content content" 1fr
+        "side-content content content content content" auto
+        "ads content content content content" auto
+        "button-container-box content content content content" auto
         "footer footer footer footer footer" auto / 1fr 0.25fr 0.75fr 1fr 1fr;
-    max-height: 130vh;
+    min-height: calc(100vh - 3vh);
 }
 
 .box-container {
@@ -36,11 +45,9 @@ main {
     }
 }
 
-/* everyone else :P */
 ::-webkit-scrollbar {
     width: 0.5rem;
 }
-
 
 ::-webkit-scrollbar-track {
     border-radius: 10px;
@@ -57,7 +64,6 @@ main {
 ::-webkit-scrollbar-thumb:active {
     border-radius: 10px;
 }
-
 
 .box-container div {
     max-width: 100%;
@@ -256,7 +262,6 @@ textarea {
     justify-content: center;
     width: 100%;
     height: 100%;
-
 }
 
 .placeholder img {
@@ -266,5 +271,4 @@ textarea {
 
 .placeholder p {
     text-align: center;
-}
 }
