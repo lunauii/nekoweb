@@ -1,7 +1,7 @@
 .circle {
   z-index: 99;
 	position: absolute;
-    border: solid 2px #f4d5f699;
+    border: solid 2px #d5dcf699;
 	width: 2em; 
 	height: 2em; 
     border-radius: 50%; 
@@ -13,7 +13,7 @@
     position: absolute;
     width: 100px;
     height: 100px;
-    background: #a966ae4f;
+    background: #6679ae4f;
     border-radius: 50%;
     transform: scale(0);
     animation: ripple-animation 1s ease-out;
@@ -33,13 +33,13 @@
 @keyframes circle-shrink {
     0% {
       transform: scale(1);
-      background-color: #f4d5f699
+      background-color: #d5def699
     }
     50% {
       transform: scale(0.8);
     }
     100% {
       transform: scale(1);
-      background-color: #f4d5f600;
+      background-color: #d5ddf600;
     }
 }

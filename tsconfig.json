@@ -11,6 +11,9 @@
     "paths": {
       "@images/*": [
         "./src/assets/images/*"
+      ],
+      "@scripts/*": [
+        "./src/scripts/*"
       ]
     },
     "jsx": "react-jsx",

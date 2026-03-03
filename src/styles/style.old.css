@@ -1,5 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
+
+@font-face {
+    font-family: 'Yuruka';
+    src: local("FOT-Yuruka Std UB Black"), url('/Yuruka.ttf') format('truetype');
+}
+
 body, html {
+    background-color: #211a22;
+    background-image: linear-gradient(-225deg, #35243a, #1b171b);
+    color: #ffffff;
     min-height: 100vh;
+    font-family: 'MS PGothic', 'Roboto', sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -27,11 +38,16 @@ main {
 
 .box-container {
     z-index: 1;
+    border: #f0caf3 2px dotted;
+    background-color: #f0caf30f;
+    backdrop-filter: blur(5px);
     overflow: auto;
     padding: 0.5rem;
+    border-radius: 10px;
 
     /* firefox */
     @-moz-document url-prefix() {
+        scrollbar-color: #f0caf3 #362938;
         scrollbar-width: thin;
     }
 }
@@ -39,22 +55,27 @@ main {
 /* everyone else :P */
 ::-webkit-scrollbar {
     width: 0.5rem;
+    background-color: #dfe6e900;
 }
 
 
 ::-webkit-scrollbar-track {
     border-radius: 10px;
+    background-color: #00000000;
 }
 
 ::-webkit-scrollbar-thumb {
+    background-color: #f0caf344;
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
+    background-color: #f0caf388;
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:active {
+    background-color: #f0caf3ff;
     border-radius: 10px;
 }
 
@@ -90,16 +111,24 @@ main {
 #top-nav a {
     font-size: 1.6rem;
     padding: 0.2rem 0.4rem;
+    border: #f0caf3 1px dashed;
     text-decoration: none;
+    color: #f0caf3;
     max-height: 100%;
+    transition: font-size 0.2s;
 }
 
 #top-nav a:hover {
     font-size: 2.5rem;
+    background-color: #f0caf3;
+    color: #35243a;
+
 }
 
 #catchphrase {
+    font-family: 'Yuruka', 'MS PGothic', sans-serif;
     font-size: 0.8rem;
+    color: #726076
 }
 
 #ticker {
@@ -147,10 +176,12 @@ main {
 }
 
 .progress-border {
+    border: 1px solid #fcd4e0;
     border-radius: 5em;
 }
 
 .progress-bar {
+    background-color: #fcd4e060;
     border-radius: 5em;
     display: flex;
     justify-content: center;
@@ -160,6 +191,7 @@ main {
 
 #progress-placeholder-text {
     font-size: 0.6rem;
+    color: #fcd4e062;
 }
 
 .progress-below {
@@ -173,6 +205,7 @@ main {
 
 #contact a {
     text-decoration: none;
+    color: #ffe18f;
 }
 
 #contact a:hover {
@@ -180,8 +213,10 @@ main {
 }
 
 #commit a {
+    font-family: 'Roboto', 'MS PGothic', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
+    color: #f0caf3;
     text-decoration: none;
 }
 
@@ -193,8 +228,30 @@ main {
     font-size: 1rem;
 }
 
+#commit-date {
+    color: #b28eba
+}
+
+#commit~hr {
+    border: 1px dashed #b67dba;
+}
+
+#diff-add {
+    color: #3fb950;
+}
+
+#diff-del {
+    color: #f85149;
+}
+
+legend {
+    color: #f7ddf9;
+}
+
 textarea {
     white-space: normal;
+    background-color: #987f9b33;
+    color: #dcc5df;
     resize: none;
 }
 
@@ -210,6 +267,8 @@ textarea {
     width: 100%;
     height: 100%;
     overflow: auto;
+    background-color: #00000099;
+    backdrop-filter: blur(15px);
 }
 
 #mobile-modal {
@@ -225,6 +284,14 @@ textarea {
     overflow: auto;
     border-radius: 1em;
     padding: 1em;
+    box-shadow: 0 0 1em #fcd4e088;
+    background-color: #251723cc;
+}
+
+#ignore-mobile {
+    border: #fcd4e0 1px solid;
+    background-color: #fcd4e033;
+    padding: 0.4em;
 }
 
 #ignore-mobile-p {
@@ -239,11 +306,18 @@ textarea {
 
 #now-playing {
     display: none;
+
+    color: #ffe6f7;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
 }
 
 #now-playing-button {
     display: none;
     cursor: pointer;
+
+    background-color: #fcd4e022;
+    color: #ffe6f7;
+    border: #fcd4e0 1px solid;
     border-radius: 1em;
     padding: 0.5em;
     text-decoration: none;
@@ -265,6 +339,6 @@ textarea {
 }
 
 .placeholder p {
+    color: #bea2c1bb;
     text-align: center;
-}
 }

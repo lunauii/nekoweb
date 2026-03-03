@@ -4,6 +4,10 @@ import BlogPost from '../components/BlogPost.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Tags from "../components/Tags.astro";
 
+import "../styles/cursor-circle.css"
+import "../styles/theme.css"
+import "../styles/global.css"
+
 const allPosts = await getCollection("blog");
 const pageTitle: String = "My Blog";
 ---
